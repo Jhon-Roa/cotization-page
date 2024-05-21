@@ -22,5 +22,21 @@ export const cardInfo = [
       ['images/img-3/answer-3.png', 'interfaz replicada de la web', 4000000],
       ['images/img-3/answer-1.png', 'no necesito diseño', 0]
     ]
-  }
+  }, {
+    question: '¿Cómo quieres sacar beneficio a tu App?',
+    cards: [
+      ['images/img-4/answer-1.png', 'Aplicacion gratuita con publicidad', 250000],
+      ['images/img-4/answer-2.png', 'Aplicacion de pago', 250000],
+      ['images/img-4/answer-3.png', 'Compras dentro de la app', 2000000],
+      ['images/img-4/answer-4.png', 'Otros / No lo se todavia', 500000],
+    ]
+  }, {
+    question: '¿Tu App necesita un sistema de login ?',
+    cards: [
+      ['images/img-5/answer-1.png', 'Si, con redes sociales y email', 250000],
+      ['images/img-5/answer-2.png', 'Si, con email', 250000],
+      ['images/img-5/answer-3.png', 'No', 2000000],
+      ['images/img-5/answer-4.png', 'Otros / No lo se todavia', 500000],
+    ]
+  }, 
 ];

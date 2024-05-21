@@ -1,5 +1,5 @@
 import { LitElement, css, html } from "lit";
-import { cardInfo } from "../../data/cardsInfo.js"; // Asegúrate de que esta ruta sea correcta
+import { cardInfo } from "../../data/cardsInfo.js";
 
 let extractedCardInfo = null
 let multiplicador = null
@@ -7,6 +7,7 @@ let precio = 0
 
 export class Questions extends LitElement {
   static styles = css`
+
     .index-main-top {
       width: 100%;
       height: 100vh;
@@ -95,6 +96,9 @@ export class Questions extends LitElement {
         justify-content: center;
         width: 100%;
         column-gap: 1%;
+        padding: 0 10%;
+        box-sizing: border-box;
+        height: 15vh;
       `;
     } else if (cardInfo[pagActual].cards.length === 3){
       return `
@@ -103,6 +107,9 @@ export class Questions extends LitElement {
         justify-content: center;
         width: 100%;
         column-gap: 1%;
+        padding: 0 10%;
+        box-sizing: border-box;
+        height: 15vh;
       `;
     }
   }
@@ -141,7 +148,11 @@ export class Questions extends LitElement {
           padding: 0 2%;
           display: flex;
           flex-direction: column;
-          align-items: center;'>
+          align-items: center;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;'>
             <img src="${card[0]}" alt="" />
             <p>${card[1]}</p>
           </div>
@@ -155,7 +166,11 @@ export class Questions extends LitElement {
           padding: 0 2%;
           display: flex;
           flex-direction: column;
-          align-items: center;'>
+          align-items: center;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;'>
             <img src="${card[0]}" alt="" style='width: 50%'/>
             <p>${card[1]}</p>
           </div>
