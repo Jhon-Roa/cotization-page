@@ -31,7 +31,7 @@ export const cardInfo = [
       ['images/img-4/answer-4.png', 'Otros / No lo se todavia', 500000],
     ]
   }, {
-    question: '¿Tu App necesita un sistema de login ?',
+    question: '¿Tu App necesita un sistema de login?',
     cards: [
       ['images/img-5/answer-1.png', 'Si, con redes sociales y email', 250000],
       ['images/img-5/answer-2.png', 'Si, con email', 250000],

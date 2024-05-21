@@ -4,6 +4,7 @@ import { cardInfo } from "../../data/cardsInfo.js";
 let extractedCardInfo = null
 let multiplicador = null
 let precio = 0
+let precioDelete = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 export class Questions extends LitElement {
   static styles = css`
@@ -24,6 +25,12 @@ export class Questions extends LitElement {
       position: absolute;
       left: 5%;
       font-weight: 400;
+      cursor: pointer;
+    }
+    
+    .precio {
+      position: absolute;
+      right: 5%;
     }
 
     .down {
@@ -76,6 +83,7 @@ export class Questions extends LitElement {
         <div class="top">
           ${this.validacionAnterior()}
           <span>${this.counter + 1}/10</span>
+          <span class='precio'>${this.validacionPrecio()}<span>
         </div>
         <div class="down">
           <h1>${cardInfo[this.counter].question}</h1>
@@ -98,7 +106,6 @@ export class Questions extends LitElement {
         column-gap: 1%;
         padding: 0 10%;
         box-sizing: border-box;
-        height: 15vh;
       `;
     } else if (cardInfo[pagActual].cards.length === 3){
       return `
@@ -109,7 +116,6 @@ export class Questions extends LitElement {
         column-gap: 1%;
         padding: 0 10%;
         box-sizing: border-box;
-        height: 15vh;
       `;
     }
   }
@@ -117,10 +123,18 @@ export class Questions extends LitElement {
   validacionAnterior() {
     if (this.counter !== 0) {
       return html`
-        <span class="anterior">anterior</span>
+        <span @click='${() => this.cargarAnterior()}' class="anterior">anterior</span>
       `;
     } else {
       return ``;
+    }
+  }
+
+  validacionPrecio() {
+    if (this.counter >= 2) {
+      return `${precio}`
+    } else {
+      return ``
     }
   }
 
@@ -129,14 +143,16 @@ export class Questions extends LitElement {
     if (this.counter === 0) {
       multiplicador = extractedCardInfo[2]
       console.log(multiplicador)
-    } else (
-      precio +=  (extractedCardInfo[2] * multiplicador)
-    )
+    } else {
+      precio +=  extractedCardInfo[2] * multiplicador
+      precioDelete[this.counter] = extractedCardInfo[2] * multiplicador 
+      console.table(precioDelete)
+    } 
     console.log(precio)
     
     this.counter++
 
-    cargarSiguiente()
+    this.cargarSiguiente()
   }
 
   printCard() {
@@ -152,7 +168,9 @@ export class Questions extends LitElement {
           width: 100%;
           display: flex;
           flex-direction: column;
-          justify-content: center;'>
+          justify-content: center;
+          max-height: 30vh;
+          min-height: 30vh;'>
             <img src="${card[0]}" alt="" />
             <p>${card[1]}</p>
           </div>
@@ -170,7 +188,9 @@ export class Questions extends LitElement {
           width: 100%;
           display: flex;
           flex-direction: column;
-          justify-content: center;'>
+          justify-content: center;
+          max-height: 30vh;
+          min-height: 30vh;'>
             <img src="${card[0]}" alt="" style='width: 50%'/>
             <p>${card[1]}</p>
           </div>
@@ -180,6 +200,22 @@ export class Questions extends LitElement {
   }
 
   cargarSiguiente() {
+    const elementToRemove = document.querySelector('questions-element')
+    const indexTop = document.getElementById('body')
+
+    elementToRemove.remove()
+    indexTop.insertAdjacentHTML('afterbegin', `
+        <questions-element counter=${this.counter}></questions-element>
+    `)
+  }
+
+  cargarAnterior() {
+    this.counter --
+
+    if (this.counter >= 1) {
+      precio -= precioDelete[this.counter]
+    }
+
     const elementToRemove = document.querySelector('questions-element')
     const indexTop = document.getElementById('body')
 
