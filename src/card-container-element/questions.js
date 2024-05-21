@@ -5,6 +5,7 @@ let extractedCardInfo = null
 let multiplicador = null
 let precio = 0
 let precioDelete = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+let producto = new Object();
 
 export class Questions extends LitElement {
   static styles = css`
@@ -148,7 +149,12 @@ export class Questions extends LitElement {
       precioDelete[this.counter] = extractedCardInfo[2] * multiplicador 
       console.table(precioDelete)
     } 
-    console.log(precio)
+
+    producto[cardInfo[this.counter].question] = extractedCardInfo[1];
+    producto["precio"] = precio;
+
+
+    console.log(producto)
     
     this.counter++
 
