@@ -13,6 +13,11 @@ export class IndexStart extends LitElement {
       height: 100vh;
     }
 
+    h1 {
+      font-size: 28px;
+      text-align: center;
+    }
+
     .index-image {
       width: auto;
       height: auto;
@@ -100,6 +105,13 @@ export class IndexStart extends LitElement {
       font-size: 16px;
       line-height: 1.3;
       text-align: center;
+    }
+
+    @media screen and (min-width: 678px) {
+      h1 {
+          font-size: 50px;
+          font-family: sans-serif;
+      }
     }
   `;
 

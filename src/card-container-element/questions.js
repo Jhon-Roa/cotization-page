@@ -38,14 +38,13 @@ export class Questions extends LitElement {
       display: flex;
       flex-direction: column;
       justify-content: center;
-      height: 80%;
+      height: 85%;
     }
 
-    .down > h1 {
+    .down > h2 {
       margin: 1% 0;
       text-align: center;
-      font-size: 20px;
-      margin-bottom: 2.5%;
+      margin-bottom: 1.5%;
     }
 
     .card:hover {
@@ -68,14 +67,16 @@ export class Questions extends LitElement {
       width: 100%;
       height: 12.5vh;'
     }
-    
-    }
 
     .card > p {
       text-align: center;
       font-weight: 400;
       align-self: center;
       margin-left: 5%;
+    }
+
+    .card>img {
+      height: 100%
     }
 
 
@@ -98,23 +99,36 @@ export class Questions extends LitElement {
     }
 
     @media screen and (min-width: 990px) {
+      .down > h2 {
+        font-size: 32px;
+      }
       .four-cards, .three-cards {
         flex-direction: column;
         justify-content: center;
-        max-height: 30vh;
-        min-height: 30vh;
+        max-height: 22.5vh;
+        min-height: 22.5vh;
+        align-items: center;
       }
       .four-cards-container {
-        grid-template-columns: repeat(4, 22,5%);
-        width: 100%
-      }
-      .three-cards-container {
-        grid-template-columns: repeat(3, 30%);
+        grid-template-columns: repeat(4, 225px);
         width: 100%;
         justify-content: center;
+        padding: 0 10%;
+        gap: 1%
+      }
+      .three-cards-container {
+        grid-template-columns: repeat(3, 315px);
+        width: 100%;
+        justify-content: center;
+        padding: 0 10%;
+        gap: 1%
       }
       .three-cards>img  {
         width: 50%;
+        height: auto
+      }
+      .four-cards>img  {
+        width: 65%;
         height: auto
       }
     }
@@ -138,7 +152,7 @@ export class Questions extends LitElement {
           <span class='precio'>${this.validacionPrecio()}<span>
         </div>
         <div class="down">
-          <h1>${cardInfo[this.counter].question}</h1>
+          <h2>${cardInfo[this.counter].question}</h2>
           <div class="card-container ${this.getClass()}">
             ${this.printCard()}
           </div>
@@ -168,8 +182,11 @@ export class Questions extends LitElement {
   }
 
   validacionPrecio() {
+    let precioAMostrar
+
     if (this.counter >= 2) {
-      return `${precio}`
+      precioAMostrar= `${precio.toLocaleString('es')}`
+      return `${precioAMostrar} cop`
     } else {
       return ``
     }
@@ -202,7 +219,7 @@ export class Questions extends LitElement {
       return cardInfo[this.counter].cards.map((card, index) => {
         return html`
           <div class="card four-cards" @click='${() => this.handlerCardClick(index)}'>
-            <img src="${card[0]}" alt="" style='height: 100%' />
+            <img src="${card[0]}" alt="" />
             <p>${card[1]}</p>
           </div>
         `;
@@ -211,7 +228,7 @@ export class Questions extends LitElement {
       return cardInfo[this.counter].cards.map((card, index) => {
         return html`
           <div class="card three-cards" @click='${() => this.handlerCardClick(index)}'>
-            <img src="${card[0]}" alt="" style='height: 100%'/>
+            <img src="${card[0]}" alt=""/>
             <p>${card[1]}</p>
           </div>
         `;

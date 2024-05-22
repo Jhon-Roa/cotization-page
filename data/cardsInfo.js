@@ -22,20 +22,16 @@ export const cardInfo = [
       ["images/img-3/answer-1.png", "interfaz sencilla", 2000000],
       ["images/img-3/answer-2.png", "interfaz personalizada", 6000000],
       ["images/img-3/answer-3.png", "interfaz replicada de la web", 4000000],
-      ["images/img-3/answer-1.png", "no necesito diseño", 0],
+      ["images/img-3/answer-4.png", "no necesito diseño", 0],
     ],
   },
   {
     question: "¿Cómo quieres sacar beneficio a tu App?",
     cards: [
-      [
-        "images/img-4/answer-1.png",
-        "Aplicacion gratuita con publicidad",
-        2000000,
-      ],
-      ["images/img-4/answer-2.png", "Aplicacion de pago", 6000000],
-      ["images/img-4/answer-3.png", "Compras dentro de la app", 4000000],
-      ["images/img-4/answer-1.png", "Otros / No lo se todavia", 0],
+      ["images/img-4/answer-1.png", "Aplicacion gratuita con publicidad", 2000000],
+      ["images/img-4/answer-2.png", "Aplicacion de pago", 250000],
+      ["images/img-4/answer-3.png", "Compras dentro de la app", 250000],
+      ["images/img-4/answer-1.png", "Otros / No lo se todavia", 500000],
     ],
   },
   {
@@ -60,18 +56,18 @@ export const cardInfo = [
   {
     question: "¿Los usuarios tienen sus propios perfiles?",
     cards: [
-      ["images/img-7/answer-1.png", "Si", 200000],
+      ["images/img-7/answer-1.png", "Si", 2000000],
       ["images/img-7/answer-2.png", "No", 0],
-      ["images/img-7/answer-3.png", "No lo se todavia", 1000000],
+      ["images/img-7/answer-3.png", "No lo se", 1000000],
     ],
   },
 
   {
     question: "¿Tu app necesita un panel de administración?",
     cards: [
-      ["images/img-8/answer-1.png", "Si", 200000],
+      ["images/img-8/answer-1.png", "Si", 2000000],
       ["images/img-8/answer-2.png", "No", 0],
-      ["images/img-8/answer-3.png", "No lo se todavia", 1000000],
+      ["images/img-8/answer-3.png", "No lo se", 1000000],
     ],
   },
 
