@@ -44,7 +44,8 @@ export class Questions extends LitElement {
     .down > h1 {
       margin: 1% 0;
       text-align: center;
-      font-size: 20px
+      font-size: 20px;
+      margin-bottom: 2.5%;
     }
 
     .card:hover {
@@ -53,18 +54,68 @@ export class Questions extends LitElement {
       transition: 200ms linear;
     }
 
-    .card > img {
-      width: 60%;
+    .four-cards-container, .three-cards-container {
+      display: grid;
+      width: 100%;
+      column-gap: 1%;
+      padding: 0;
+      box-sizing: border-box;
+      padding: 0 2%
+    }
+
+    .four-cards, .three-cards {
+      display: flex;
+      width: 100%;
+      height: 12.5vh;'
+    }
+    
     }
 
     .card > p {
       text-align: center;
       font-weight: 400;
+      align-self: center;
+      margin-left: 5%;
     }
 
-    @media screen and (min-width: 678px) {
+
+    @media screen and (min-width: 678px) and (max-width: 990px) {
       .down > h1 {
         font-size: 32px;
+      }
+      .four-cards-container, .three-cards-container{
+        justify-content: center;
+        padding: 0 0%
+      }
+      .three-cards-container, .four-cards-container {
+        grid-template-columns: 45% 45%;
+      }
+      .three-cards-container>div:nth-child(3) {
+        grid-column: span 2;
+        justify-self: center;
+        width: 50%;
+      }
+    }
+
+    @media screen and (min-width: 990px) {
+      .four-cards, .three-cards {
+        flex-direction: column;
+        justify-content: center;
+        max-height: 30vh;
+        min-height: 30vh;
+      }
+      .four-cards-container {
+        grid-template-columns: repeat(4, 22,5%);
+        width: 100%
+      }
+      .three-cards-container {
+        grid-template-columns: repeat(3, 30%);
+        width: 100%;
+        justify-content: center;
+      }
+      .three-cards>img  {
+        width: 50%;
+        height: auto
       }
     }
   `;
@@ -88,7 +139,7 @@ export class Questions extends LitElement {
         </div>
         <div class="down">
           <h1>${cardInfo[this.counter].question}</h1>
-          <div class="card-container" style="${this.getStyle()}">
+          <div class="card-container ${this.getClass()}">
             ${this.printCard()}
           </div>
         </div>
@@ -96,28 +147,13 @@ export class Questions extends LitElement {
     `;
   }
 
-  getStyle() {
-    const pagActual = this.counter;
-    if (cardInfo[pagActual].cards.length === 4) {
-      return `
-        display: grid;
-        grid-template-columns: repeat(4, 20%);
-        justify-content: center;
-        width: 100%;
-        column-gap: 1%;
-        padding: 0 10%;
-        box-sizing: border-box;
-      `;
-    } else if (cardInfo[pagActual].cards.length === 3){
-      return `
-        display: grid;
-        grid-template-columns: repeat(3, 30%);
-        justify-content: center;
-        width: 100%;
-        column-gap: 1%;
-        padding: 0 10%;
-        box-sizing: border-box;
-      `;
+  getClass() {
+    if (cardInfo[this.counter].cards.length === 4) {
+      return `four-cards-container`
+    } else if (cardInfo[this.counter].cards.length === 3) {
+      return `three-cards-container`
+    } else if (cardInfo[this.counter].cards.length === 5) {
+      return `five-cards-container`
     }
   }
 
@@ -165,19 +201,8 @@ export class Questions extends LitElement {
     if (cardInfo[this.counter].cards.length === 4) {
       return cardInfo[this.counter].cards.map((card, index) => {
         return html`
-          <div class="card" @click='${() => this.handlerCardClick(index)}' style='
-          margin: 0 1%;
-          padding: 0 2%;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          width: 100%;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          max-height: 30vh;
-          min-height: 30vh;'>
-            <img src="${card[0]}" alt="" />
+          <div class="card four-cards" @click='${() => this.handlerCardClick(index)}'>
+            <img src="${card[0]}" alt="" style='height: 100%' />
             <p>${card[1]}</p>
           </div>
         `;
@@ -185,19 +210,8 @@ export class Questions extends LitElement {
     } else if (cardInfo[this.counter].cards.length === 3) {
       return cardInfo[this.counter].cards.map((card, index) => {
         return html`
-          <div class="card" @click='${() => this.handlerCardClick(index)}' style='
-          margin: 0 1%;
-          padding: 0 2%;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          width: 100%;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          max-height: 30vh;
-          min-height: 30vh;'>
-            <img src="${card[0]}" alt="" style='width: 50%'/>
+          <div class="card three-cards" @click='${() => this.handlerCardClick(index)}'>
+            <img src="${card[0]}" alt="" style='height: 100%'/>
             <p>${card[1]}</p>
           </div>
         `;
@@ -210,9 +224,15 @@ export class Questions extends LitElement {
     const indexTop = document.getElementById('body')
 
     elementToRemove.remove()
-    indexTop.insertAdjacentHTML('afterbegin', `
-        <questions-element counter=${this.counter}></questions-element>
-    `)
+    if (this.counter <= 9) {
+      indexTop.insertAdjacentHTML('afterbegin', `
+      <questions-element counter=${this.counter}></questions-element>
+      `)
+    } else {
+      indexTop.insertAdjacentHTML('afterbegin', `
+      <h1>${precio}</h1>
+      `)
+    }
   }
 
   cargarAnterior() {
