@@ -11,7 +11,7 @@ const apiUrl = import.meta.env.VITE_API_URL;
 
 export class FormElement extends LitElement {
   static styles = css`
-    .index-main-top {
+    .form {
       width: 100vw;
       height: 100vh;
       display: flex;
@@ -25,7 +25,7 @@ export class FormElement extends LitElement {
       justify-content: center;
       background-color: #514d4a;
       width: 40%;
-      height: 40%;
+      height: 30%;
       border: #787672 solid 1px;
       border-radius: 25px;
       box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.8);
@@ -79,7 +79,7 @@ export class FormElement extends LitElement {
 
   render() {
     return html`
-      <div class="index-main-top">
+      <div class="form">
         <form @submit=${this.handlerForm} class="form-cliente">
           <label for="name" class="form-label">name: </label>
           <input
@@ -131,8 +131,6 @@ export class FormElement extends LitElement {
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
-      const newUser = await response.json();
-      console.log("New User:", newUser);
     } catch (error) {
       console.error("Fetch error:", error);
     }

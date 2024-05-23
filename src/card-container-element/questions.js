@@ -1,12 +1,14 @@
 import { LitElement, css, html } from "lit";
 import { cardInfo } from "../../data/cardsInfo.js";
-import "../form-element/form-element.js";
+import "../final-page/final-page.js";
 
-const extractedCardInfo = null;
-const multiplicador = null;
-const precio = 0;
-const precioDelete = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-export const producto = new Object();
+
+let extractedCardInfo = null;
+let multiplicador = null;
+let precio = 0;
+let precioDelete = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+export let producto = new Object();
+export let precioAMostrar = '';
 
 export class Questions extends LitElement {
   static styles = css`
@@ -176,7 +178,7 @@ export class Questions extends LitElement {
     if (this.counter !== 0) {
       return html`
         <span @click="${() => this.cargarAnterior()}" class="anterior"
-          >anterior</span
+          >←anterior</span
         >
       `;
     } else {
@@ -185,8 +187,6 @@ export class Questions extends LitElement {
   }
 
   validacionPrecio() {
-    let precioAMostrar;
-
     if (this.counter >= 2) {
       precioAMostrar = `${precio.toLocaleString("es")}`;
       return `${precioAMostrar} cop`;
@@ -262,7 +262,7 @@ export class Questions extends LitElement {
       indexTop.insertAdjacentHTML(
         "afterbegin",
         `
-      <form-element producto=${cadena}></form-element>
+      <final-page></final-page>
       `
       );
     }
