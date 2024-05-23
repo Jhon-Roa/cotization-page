@@ -14,6 +14,7 @@ export const cardInfo = [
       ["images/img-2/answer-2.png", "Aplicacion iOS", 3000000],
       ["images/img-2/answer-3.png", "Aplicacion Windows Phone", 3000000],
       ["images/img-2/answer-4.png", "Aplicacion android + iOs", 5000000],
+      ["images/img-2/answer-5.webp", "Aplicacion de escritorio", 3000000]
     ],
   },
   {

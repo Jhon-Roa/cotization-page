@@ -2,6 +2,11 @@ import { LitElement, css, html } from "lit";
 import { precioAMostrar } from "../card-container-element/questions";
 import "../form-element/form-element.js";
 
+export let valid = {
+  valid: true,
+  clase: 'active'
+}
+
 export class finalPage extends LitElement {
     static styles = css`
     .index-main-top {
@@ -46,7 +51,6 @@ export class finalPage extends LitElement {
         padding: 1em 3em;
         border: 0;
         border-radius: 5px;
-        background-image: linear-gradient(to left, #14e6d3, #8660f5);
         box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2);
         color: #fff;
         line-height: 1.42857143;
@@ -102,6 +106,14 @@ export class finalPage extends LitElement {
         animation: shine 1s linear;
       }
 
+      .active {
+        background-image: linear-gradient(to left, #14e6d3, #8660f5);
+      }
+
+      .inactive {
+        background-image: linear-gradient(to left, #fff, #000);
+      }
+
       .reinicio {
         position: absolute;
         left: 0;
@@ -140,6 +152,14 @@ export class finalPage extends LitElement {
       }
   
     `
+    static properties = {
+      local: {type:String}
+    }
+
+    constructor () {
+      super();
+      this.local= valid.clase
+    }
 
     render() {
         return html`
@@ -151,7 +171,7 @@ export class finalPage extends LitElement {
         <h1 class="color">${precioAMostrar} cop</h1>
         <p>En Yeeply seleccionamos los mejores <span class="weigth">desarrolladores de apps y webs</span> para tu proyecto.
           Publica tu proyecto en Yeeply o mira algunos de nuestros <span class="color">casos de éxito.</span> </p>
-        <button @click=${this.insertForm}>crea tu proyecto</button>
+        <button @click=${this.insertForm} class='${valid.clase}' id='button'>crea tu proyecto</button>
       </div>
         `
     }
@@ -161,12 +181,14 @@ export class finalPage extends LitElement {
     }
 
     insertForm() {
+      if (valid.valid) {
         const indexTop = this.shadowRoot.querySelector('.index-main-top');
 
         indexTop.insertAdjacentHTML("beforeend",`
             <form-element class='form-wrapper' ></form-element>
           `
         );
+      }
     }
 
     

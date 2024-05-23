@@ -1,11 +1,10 @@
 import { LitElement, css, html } from "lit";
 import { producto } from "../card-container-element/questions";
+import { valid } from "../final-page/final-page";
 
-const client = {
-  name: "",
-  email: "",
-  date: new Date().toISOString(),
-};
+
+
+const client = {};
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -25,7 +24,9 @@ export class FormElement extends LitElement {
       justify-content: center;
       background-color: #514d4a;
       width: 40%;
+      max-width: 500px;
       height: 30%;
+      min-height: 200px;
       border: #787672 solid 1px;
       border-radius: 25px;
       box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.8);
@@ -34,10 +35,15 @@ export class FormElement extends LitElement {
     .form-input,
     .form-label {
       margin: 0 20%;
+      text-align: left
     }
 
     .form-input {
       margin-bottom: 3%;
+      height: 10%;
+      border-radius: 10px;
+      border: solid 1px;
+      padding-left: 3%
     }
 
     .form-button {
@@ -56,7 +62,7 @@ export class FormElement extends LitElement {
       text-decoration: none;
       white-space: nowrap;
       font-family: sans-serif;
-      font-size: 20px;
+      font-size: 15px;
       vertical-align: middle;
       -ms-touch-action: manipulation;
       touch-action: manipulation;
@@ -73,13 +79,13 @@ export class FormElement extends LitElement {
     @media (orientation: portrait) {
       .form-cliente {
         width: 90%;
-      }
+      } 
     }
   `;
 
   render() {
     return html`
-      <div class="form">
+      <div class="form" id='form' @click=${this.exitForm}>
         <form @submit=${this.handlerForm} class="form-cliente">
           <label for="name" class="form-label">name: </label>
           <input
@@ -87,7 +93,7 @@ export class FormElement extends LitElement {
             name="name"
             id="name"
             class="form-input"
-            placeholder="johlver pardo"
+            placeholder="Jhon Roa"
             required
           />
 
@@ -107,16 +113,35 @@ export class FormElement extends LitElement {
     `;
   }
 
+  exitForm(event) {
+    const elementToRemove = event.target
+
+    if (elementToRemove.id === 'form' ) {
+      elementToRemove.remove()
+    } 
+
+    
+  }
+
   handlerForm(event) {
     event.preventDefault();
 
     const clientBasicInfo = new FormData(event.target);
-    client.name = clientBasicInfo.get("name");
-    client.email = clientBasicInfo.get("email");
+    client['name'] = clientBasicInfo.get("name");
+    client['email'] = clientBasicInfo.get("email");
+    client['date'] =  new Date().toISOString(),
     client["info"] = producto;
     console.log(this.producto);
 
+
     this.postMethod(client);
+
+    valid.valid = false
+    valid.clase = 'inactive'
+
+    let elementToDelete= this.shadowRoot.querySelector('.form')
+    elementToDelete.remove()
+
   }
 
   async postMethod(client) {

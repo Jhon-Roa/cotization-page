@@ -2,20 +2,28 @@ import { LitElement, css, html } from "lit";
 import { cardInfo } from "../../data/cardsInfo.js";
 import "../final-page/final-page.js";
 
-
 let extractedCardInfo = null;
 let multiplicador = null;
 let precio = 0;
 let precioDelete = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 export let producto = new Object();
-export let precioAMostrar = '';
+export let precioAMostrar = "";
 
 export class Questions extends LitElement {
   static styles = css`
-
     .index-main-top {
       width: 100%;
       height: 100vh;
+      animation: start-anim 0.5s linear 1
+    }
+
+    @keyframes start-anim {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
     }
 
     .top {
@@ -31,7 +39,7 @@ export class Questions extends LitElement {
       font-weight: 400;
       cursor: pointer;
     }
-    
+
     .precio {
       position: absolute;
       right: 5%;
@@ -51,24 +59,28 @@ export class Questions extends LitElement {
     }
 
     .card:hover {
-      background-color: #514D4A;
+      background-color: #514d4a;
       transform: translateY(-5%);
       transition: 200ms linear;
     }
 
-    .four-cards-container, .three-cards-container {
+    .four-cards-container,
+    .three-cards-container,
+    .five-cards-container {
       display: grid;
       width: 100%;
       column-gap: 1%;
       padding: 0;
       box-sizing: border-box;
-      padding: 0 2%
+      padding: 0 2%;
     }
 
-    .four-cards, .three-cards {
+    .four-cards,
+    .three-cards,
+    .five-cards {
       display: flex;
       width: 100%;
-      height: 100px;'
+      height: 100px; 
     }
 
     .card > p {
@@ -76,26 +88,37 @@ export class Questions extends LitElement {
       font-weight: 400;
       align-self: center;
       margin-left: 5%;
-      text-align: left
+      text-align: left;
     }
 
-    .card>img {
-      height: 100%
+    .card > img {
+      height: 100%;
     }
 
+    @media screen and (max-height: 500px) and (orientation: landscape) {
+      .index-main-top {
+        min-height: 100vh;
+        height: auto;
+      }
+    }
 
     @media screen and (min-width: 678px) and (max-width: 990px) {
       .down > h1 {
         font-size: 32px;
       }
-      .four-cards-container, .three-cards-container{
+      .four-cards-container,
+      .three-cards-container,
+      .five-cards-container {
         justify-content: center;
-        padding: 0 0%
+        padding: 0 0%;
       }
-      .three-cards-container, .four-cards-container {
+      .three-cards-container,
+      .four-cards-container,
+      .five-cards-container {
         grid-template-columns: 45% 45%;
       }
-      .three-cards-container>div:nth-child(3) {
+      .three-cards-container > div:nth-child(3),
+      .five-cards-container > div:nth-child(5) {
         grid-column: span 2;
         justify-self: center;
         width: 50%;
@@ -106,33 +129,44 @@ export class Questions extends LitElement {
       .down > h2 {
         font-size: 32px;
       }
-      .four-cards, .three-cards {
+      .four-cards,
+      .three-cards,
+      .five-cards {
         flex-direction: column;
         justify-content: center;
         height: 200px;
         align-items: center;
+      }
+      .five-cards-container {
+        display: grid;
+        grid-template-columns: repeat(5, 180px);
+        width: 100%;
+        justify-content: center;
+        padding: 0 10%;
+        gap: 1%;
       }
       .four-cards-container {
         grid-template-columns: repeat(4, 225px);
         width: 100%;
         justify-content: center;
         padding: 0 10%;
-        gap: 1%
+        gap: 1%;
       }
       .three-cards-container {
         grid-template-columns: repeat(3, 315px);
         width: 100%;
         justify-content: center;
         padding: 0 10%;
-        gap: 1%
+        gap: 1%;
       }
-      .three-cards>img  {
+      .three-cards > img {
         width: 50%;
-        height: auto
+        height: auto;
       }
-      .four-cards>img  {
+      .four-cards > img,
+      .five-cards > img {
         width: 65%;
-        height: auto
+        height: auto;
       }
     }
   `;
@@ -234,6 +268,18 @@ export class Questions extends LitElement {
         return html`
           <div
             class="card three-cards"
+            @click="${() => this.handlerCardClick(index)}"
+          >
+            <img src="${card[0]}" alt="" />
+            <p>${card[1]}</p>
+          </div>
+        `;
+      });
+    } else if (cardInfo[this.counter].cards.length === 5) {
+      return cardInfo[this.counter].cards.map((card, index) => {
+        return html`
+          <div
+            class="card five-cards"
             @click="${() => this.handlerCardClick(index)}"
           >
             <img src="${card[0]}" alt="" />
