@@ -14,7 +14,7 @@ export class Questions extends LitElement {
     .index-main-top {
       width: 100%;
       height: 100vh;
-      animation: start-anim 0.5s linear 1
+      animation: start-anim 0.5s linear 1;
     }
 
     @keyframes start-anim {
@@ -80,7 +80,7 @@ export class Questions extends LitElement {
     .five-cards {
       display: flex;
       width: 100%;
-      height: 100px; 
+      height: 100px;
     }
 
     .card > p {
@@ -242,8 +242,6 @@ export class Questions extends LitElement {
 
     producto["precio"] = precio;
     producto[`question${this.counter + 1}`] = extractedCardInfo[1];
-
-    console.log(producto);
 
     this.counter++;
 
