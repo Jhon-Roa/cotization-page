@@ -1,5 +1,5 @@
 import { LitElement, css, html } from "lit";
-import '../card-container-element/questions.js';
+import "../card-container-element/questions.js";
 
 export class IndexStart extends LitElement {
   static styles = css`
@@ -52,7 +52,7 @@ export class IndexStart extends LitElement {
       user-select: none;
       overflow: hidden;
     }
-    
+
     button::after {
       position: absolute;
       content: "";
@@ -63,13 +63,14 @@ export class IndexStart extends LitElement {
       background-image: linear-gradient(
         to left,
         rgba(255, 255, 255, 0) 0%,
-        rgba(255, 255, 255, 0.4) 50%, /* Hacer el rayo más brillante en el centro */
-        rgba(255, 255, 255, 0) 100%
+        rgba(255, 255, 255, 0.4) 50%,
+        /* Hacer el rayo más brillante en el centro */ rgba(255, 255, 255, 0)
+          100%
       );
       opacity: 0;
       transform: skew(-15deg);
     }
-    
+
     @keyframes shine {
       0% {
         left: -150%;
@@ -83,7 +84,7 @@ export class IndexStart extends LitElement {
         opacity: 0;
       }
     }
-    
+
     button:hover::after {
       animation: shine 1s linear;
     }
@@ -109,8 +110,8 @@ export class IndexStart extends LitElement {
 
     @media screen and (min-width: 678px) {
       h1 {
-          font-size: 50px;
-          font-family: sans-serif;
+        font-size: 50px;
+        font-family: sans-serif;
       }
     }
   `;
@@ -141,12 +142,15 @@ export class IndexStart extends LitElement {
 
   startProgram() {
     const elementToDelete = document.querySelector("index-start");
-    const indexTop = document.getElementById('body')
+    const indexTop = document.getElementById("body");
 
     elementToDelete.remove();
-    indexTop.insertAdjacentHTML('afterbegin', `
+    indexTop.insertAdjacentHTML(
+      "afterbegin",
+      `
         <questions-element></questions-element>
-    `)
+    `
+    );
   }
 }
 

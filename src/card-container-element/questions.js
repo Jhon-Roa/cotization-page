@@ -1,11 +1,12 @@
 import { LitElement, css, html } from "lit";
 import { cardInfo } from "../../data/cardsInfo.js";
+import "../form-element/form-element.js";
 
-let extractedCardInfo = null
-let multiplicador = null
-let precio = 0
-let precioDelete = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-let producto = new Object();
+const extractedCardInfo = null;
+const multiplicador = null;
+const precio = 0;
+const precioDelete = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+export const producto = new Object();
 
 export class Questions extends LitElement {
   static styles = css`
@@ -65,7 +66,7 @@ export class Questions extends LitElement {
     .four-cards, .three-cards {
       display: flex;
       width: 100%;
-      height: 12.5vh;'
+      height: 100px;'
     }
 
     .card > p {
@@ -73,6 +74,7 @@ export class Questions extends LitElement {
       font-weight: 400;
       align-self: center;
       margin-left: 5%;
+      text-align: left
     }
 
     .card>img {
@@ -105,8 +107,7 @@ export class Questions extends LitElement {
       .four-cards, .three-cards {
         flex-direction: column;
         justify-content: center;
-        max-height: 22.5vh;
-        min-height: 22.5vh;
+        height: 200px;
         align-items: center;
       }
       .four-cards-container {
@@ -163,18 +164,20 @@ export class Questions extends LitElement {
 
   getClass() {
     if (cardInfo[this.counter].cards.length === 4) {
-      return `four-cards-container`
+      return `four-cards-container`;
     } else if (cardInfo[this.counter].cards.length === 3) {
-      return `three-cards-container`
+      return `three-cards-container`;
     } else if (cardInfo[this.counter].cards.length === 5) {
-      return `five-cards-container`
+      return `five-cards-container`;
     }
   }
 
   validacionAnterior() {
     if (this.counter !== 0) {
       return html`
-        <span @click='${() => this.cargarAnterior()}' class="anterior">anterior</span>
+        <span @click="${() => this.cargarAnterior()}" class="anterior"
+          >anterior</span
+        >
       `;
     } else {
       return ``;
@@ -182,43 +185,45 @@ export class Questions extends LitElement {
   }
 
   validacionPrecio() {
-    let precioAMostrar
+    let precioAMostrar;
 
     if (this.counter >= 2) {
-      precioAMostrar= `${precio.toLocaleString('es')}`
-      return `${precioAMostrar} cop`
+      precioAMostrar = `${precio.toLocaleString("es")}`;
+      return `${precioAMostrar} cop`;
     } else {
-      return ``
+      return ``;
     }
   }
 
   handlerCardClick(index) {
     extractedCardInfo = cardInfo[this.counter].cards[index];
     if (this.counter === 0) {
-      multiplicador = extractedCardInfo[2]
-      console.log(multiplicador)
+      multiplicador = extractedCardInfo[2];
+      console.log(multiplicador);
     } else {
-      precio +=  extractedCardInfo[2] * multiplicador
-      precioDelete[this.counter] = extractedCardInfo[2] * multiplicador 
-      console.table(precioDelete)
-    } 
+      precio += extractedCardInfo[2] * multiplicador;
+      precioDelete[this.counter] = extractedCardInfo[2] * multiplicador;
+      console.table(precioDelete);
+    }
 
-    producto[cardInfo[this.counter].question] = extractedCardInfo[1];
     producto["precio"] = precio;
+    producto[`question${this.counter + 1}`] = extractedCardInfo[1];
 
+    console.log(producto);
 
-    console.log(producto)
-    
-    this.counter++
+    this.counter++;
 
-    this.cargarSiguiente()
+    this.cargarSiguiente();
   }
 
   printCard() {
     if (cardInfo[this.counter].cards.length === 4) {
       return cardInfo[this.counter].cards.map((card, index) => {
         return html`
-          <div class="card four-cards" @click='${() => this.handlerCardClick(index)}'>
+          <div
+            class="card four-cards"
+            @click="${() => this.handlerCardClick(index)}"
+          >
             <img src="${card[0]}" alt="" />
             <p>${card[1]}</p>
           </div>
@@ -227,8 +232,11 @@ export class Questions extends LitElement {
     } else if (cardInfo[this.counter].cards.length === 3) {
       return cardInfo[this.counter].cards.map((card, index) => {
         return html`
-          <div class="card three-cards" @click='${() => this.handlerCardClick(index)}'>
-            <img src="${card[0]}" alt=""/>
+          <div
+            class="card three-cards"
+            @click="${() => this.handlerCardClick(index)}"
+          >
+            <img src="${card[0]}" alt="" />
             <p>${card[1]}</p>
           </div>
         `;
@@ -237,35 +245,46 @@ export class Questions extends LitElement {
   }
 
   cargarSiguiente() {
-    const elementToRemove = document.querySelector('questions-element')
-    const indexTop = document.getElementById('body')
+    const elementToRemove = document.querySelector("questions-element");
+    const indexTop = document.getElementById("body");
 
-    elementToRemove.remove()
+    elementToRemove.remove();
     if (this.counter <= 9) {
-      indexTop.insertAdjacentHTML('afterbegin', `
+      indexTop.insertAdjacentHTML(
+        "afterbegin",
+        `
       <questions-element counter=${this.counter}></questions-element>
-      `)
+      `
+      );
     } else {
-      indexTop.insertAdjacentHTML('afterbegin', `
-      <h1>${precio}</h1>
-      `)
+      const cadena = JSON.stringify(producto);
+      console.log(cadena);
+      indexTop.insertAdjacentHTML(
+        "afterbegin",
+        `
+      <form-element producto=${cadena}></form-element>
+      `
+      );
     }
   }
 
   cargarAnterior() {
-    this.counter --
+    this.counter--;
 
     if (this.counter >= 1) {
-      precio -= precioDelete[this.counter]
+      precio -= precioDelete[this.counter];
     }
 
-    const elementToRemove = document.querySelector('questions-element')
-    const indexTop = document.getElementById('body')
+    const elementToRemove = document.querySelector("questions-element");
+    const indexTop = document.getElementById("body");
 
-    elementToRemove.remove()
-    indexTop.insertAdjacentHTML('afterbegin', `
+    elementToRemove.remove();
+    indexTop.insertAdjacentHTML(
+      "afterbegin",
+      `
         <questions-element counter=${this.counter}></questions-element>
-    `)
+    `
+    );
   }
 }
 
