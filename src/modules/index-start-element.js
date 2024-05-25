@@ -9,7 +9,6 @@ export class IndexStart extends LitElement {
       justify-content: center;
       align-items: center;
 
-      width: 100vw;
       height: 100vh;
     }
 

@@ -132,7 +132,7 @@ export class Questions extends LitElement {
       .three-cards,
       .five-cards {
         flex-direction: column;
-        justify-content: center;
+        justify-content: space-beetwen;
         height: 200px;
         align-items: center;
       }
@@ -258,7 +258,7 @@ export class Questions extends LitElement {
             class="card four-cards"
             @click="${() => this.handlerCardClick(index)}"
           >
-            <img src="${card[0]}" alt="" />
+            ${card[0]}
             <p>${card[1]}</p>
           </div>
         `;
@@ -270,7 +270,7 @@ export class Questions extends LitElement {
             class="card three-cards"
             @click="${() => this.handlerCardClick(index)}"
           >
-            <img src="${card[0]}" alt="" />
+            ${card[0]}
             <p>${card[1]}</p>
           </div>
         `;
@@ -282,7 +282,7 @@ export class Questions extends LitElement {
             class="card five-cards"
             @click="${() => this.handlerCardClick(index)}"
           >
-            <img src="${card[0]}" alt="" />
+            ${card[0]}
             <p>${card[1]}</p>
           </div>
         `;
