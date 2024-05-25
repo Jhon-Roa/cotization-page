@@ -1,5 +1,6 @@
 import { LitElement, css, html } from "lit";
 import { valid } from "./final-page";
+import { producto } from "./questions";
 
 const client = {};
 
@@ -137,7 +138,8 @@ export class FormElement extends LitElement {
     client["name"] = clientBasicInfo.get("name");
     client["email"] = clientBasicInfo.get("email");
     client["lastName"] = clientBasicInfo.get("lastName");
-    (client["date"] = new Date().toISOString()), (client["info"] = producto);
+    client["date"] = new Date().toISOString();
+    client["info"] = producto;
     console.log(client);
 
     this.postMethod(client);
