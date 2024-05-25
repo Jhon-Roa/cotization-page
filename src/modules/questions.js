@@ -258,7 +258,7 @@ export class Questions extends LitElement {
             class="card four-cards"
             @click="${() => this.handlerCardClick(index)}"
           >
-            ${card[0]}
+            <img src="${card[0]} rel="prefetch"" alt="" />
             <p>${card[1]}</p>
           </div>
         `;
@@ -270,7 +270,7 @@ export class Questions extends LitElement {
             class="card three-cards"
             @click="${() => this.handlerCardClick(index)}"
           >
-            ${card[0]}
+            <img src="${card[0]} rel="prefetch"" alt="" />
             <p>${card[1]}</p>
           </div>
         `;
@@ -282,7 +282,7 @@ export class Questions extends LitElement {
             class="card five-cards"
             @click="${() => this.handlerCardClick(index)}"
           >
-            ${card[0]}
+            <img src="${card[0]} rel="prefetch"" alt="" />
             <p>${card[1]}</p>
           </div>
         `;
