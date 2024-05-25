@@ -1,5 +1,5 @@
 import { LitElement, css, html } from "lit";
-import "../card-container-element/questions.js";
+
 
 export class IndexStart extends LitElement {
   static styles = css`

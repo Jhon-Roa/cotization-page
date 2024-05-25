@@ -1,6 +1,5 @@
 import { LitElement, css, html } from "lit";
-import { producto } from "../card-container-element/questions";
-import { valid } from "../final-page/final-page";
+import { valid } from "./final-page";
 
 const client = {};
 

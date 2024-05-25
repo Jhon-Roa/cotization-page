@@ -1,6 +1,6 @@
 import { LitElement, css, html } from "lit";
-import { precioAMostrar } from "../card-container-element/questions";
-import "../form-element/form-element.js";
+import { precioAMostrar } from "./questions";
+
 
 export let valid = {
   valid: true,

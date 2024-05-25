@@ -2,7 +2,7 @@ export const cardInfo = [
   {
     question: "¿Que nivel de calidad estas buscando?",
     cards: [
-      ["images/img-1/answer-1.png", "Calidad optima", 3],
+      ["https://github.com/Jhon-Roa/cotization-page/blob/main/images/img-1/answer-1.png?raw=true", "Calidad optima", 3],
       ["images/img-1/answer-2.png", "Buena relacion Calidad/precio", 2],
       ["images/img-1/answer-3.png", "No me importa tanto la calidad", 1],
     ],

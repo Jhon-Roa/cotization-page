@@ -1,6 +1,5 @@
 import { LitElement, css, html } from "lit";
-import { cardInfo } from "../../data/cardsInfo.js";
-import "../final-page/final-page.js";
+import { cardInfo } from "../cardsInfo.js";
 
 let extractedCardInfo = null;
 let multiplicador = null;
@@ -167,6 +166,9 @@ export class Questions extends LitElement {
       .five-cards > img {
         width: 65%;
         height: auto;
+      }
+      .card>p {
+        text-align: center
       }
     }
   `;
